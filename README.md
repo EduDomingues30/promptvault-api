@@ -25,6 +25,7 @@ Para rodar com PostgreSQL, ative o profile prod:
 
 mvn spring-boot:run -Dspring-boot.run.profiles=prod
 Endpoints principais
+
 Criar prompt
 curl -X POST http://localhost:8080/api/v1/prompts \
   -H "Content-Type: application/json" \
@@ -43,6 +44,8 @@ curl -X POST http://localhost:8080/api/v1/prompts/1/versions \
     "changelog": "Versão inicial",
     "author": "Eduardo Domingues"
   }'
+
+  
 Testar prompt (simulado)
 curl -X POST http://localhost:8080/api/v1/prompts/1/test \
   -H "Content-Type: application/json" \
@@ -55,12 +58,16 @@ curl -X POST http://localhost:8080/api/v1/prompts/1/test \
       "texto": "Relatório trimestral com métricas de crescimento..."
     }
   }'
+
+  
 Listar prompts (paginado)
 curl "http://localhost:8080/api/v1/prompts?page=0&size=10"
 Adicionar/remover tags
 curl -X POST http://localhost:8080/api/v1/prompts/1/tags/producao
 curl -X DELETE http://localhost:8080/api/v1/prompts/1/tags/producao
 Estrutura de pastas
+
+
 promptvault-api/
 ├── pom.xml
 ├── README.md
@@ -81,6 +88,8 @@ promptvault-api/
     └── test
         └── java/com/eduardodomingues/promptvault
             └── PromptVaultApplicationTests.java
+
+            
 Observações sobre a integração com providers
 O endpoint POST /api/v1/prompts/{id}/test atualmente executa uma simulação: renderiza o template substituindo {{variavel}} pelos valores enviados e retorna uma resposta simulada indicando o provider (azure-openai ou ollama). Para integração real, basta implementar clientes HTTP nos serviços correspondentes usando as propriedades já reservadas em application.properties.
 
